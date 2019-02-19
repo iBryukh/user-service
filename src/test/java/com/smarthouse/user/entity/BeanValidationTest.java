@@ -2,6 +2,7 @@ package com.smarthouse.user.entity;
 
 import org.junit.Test;
 
+import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 
@@ -27,10 +28,21 @@ public class BeanValidationTest {
     private static final String correctPassword = "1234567890";
     private static final String incorrectPassword = "12345";
 
+    private static final String ROLE_ACCESS_LEVEL = "accessLevel";
+    private static final Integer correctAccessLevel = 0;
+    private static final Integer incorrectAccessLevel = 10;
+
+
     private static final Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 
     private static final User correctUser = new User(id, correctName, correctEmail, correctPhoneNumber, correctPassword);
     private static final User incorrectUser = new User(id, incorrectName, incorrectEmail, incorrectPhoneNumber, incorrectPassword);
+
+    private static final Role correctRole = new Role(id, correctName, correctAccessLevel);
+    private static final Role incorrectRole = new Role(id, incorrectName, incorrectAccessLevel);
+
+
+    // User validation
 
     @Test
     public void correctUserNameValidation() {
@@ -45,27 +57,6 @@ public class BeanValidationTest {
     @Test
     public void incorrectUserNameValidation() {
         validator.validate(incorrectUser).stream()
-                .filter(it -> it.getPropertyPath().toString().equals(NAME))
-                .map(it -> it.getInvalidValue().toString())
-                .forEach(name -> assertEquals(name, incorrectName));
-    }
-
-
-    @Test
-    public void correctRoleNameValidation() {
-        assertEquals(
-                0,
-                validator.validate(new Role(id, correctName, AccessLevel.GREEN)).stream()
-                        .filter(it -> it.getPropertyPath().toString().equals(NAME))
-                        .count()
-        );
-    }
-
-    @Test
-    public void incorrectRoleNameValidation() {
-        validator.validate(
-                new Role(id, incorrectName, AccessLevel.GREEN)
-        ).stream()
                 .filter(it -> it.getPropertyPath().toString().equals(NAME))
                 .map(it -> it.getInvalidValue().toString())
                 .forEach(name -> assertEquals(name, incorrectName));
@@ -124,6 +115,44 @@ public class BeanValidationTest {
                 .map(it -> it.getInvalidValue().toString())
                 .forEach(name -> assertEquals(name, incorrectPassword));
 
+    }
+
+    // Role validation
+
+    @Test
+    public void correctRoleNameValidation() {
+        assertEquals(
+                0,
+                validator.validate(correctRole).stream()
+                        .filter(it -> it.getPropertyPath().toString().equals(NAME))
+                        .count()
+        );
+    }
+
+    @Test
+    public void incorrectRoleNameValidation() {
+        validator.validate(incorrectRole).stream()
+                .filter(it -> it.getPropertyPath().toString().equals(NAME))
+                .map(it -> it.getInvalidValue().toString())
+                .forEach(name -> assertEquals(name, incorrectName));
+    }
+
+    @Test
+    public void correctRoleAccessLevelValidation() {
+        assertEquals(
+                0,
+                validator.validate(correctRole).stream()
+                        .filter(it -> it.getPropertyPath().toString().equals(ROLE_ACCESS_LEVEL))
+                        .count()
+        );
+    }
+
+    @Test
+    public void incorrectRoleAccessLevelValidation() {
+        validator.validate(incorrectRole).stream()
+                .filter(it -> it.getPropertyPath().toString().equals(ROLE_ACCESS_LEVEL))
+                .map(ConstraintViolation::getInvalidValue)
+                .forEach(value -> assertEquals(incorrectAccessLevel, value));
     }
 
 

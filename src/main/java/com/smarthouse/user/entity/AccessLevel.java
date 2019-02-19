@@ -1,5 +1,5 @@
 package com.smarthouse.user.entity;
 
 public enum AccessLevel {
-    RED, GREEN, BLUE, WHITE
+    ADMIN, NEIGHBOUR, OBSERVER, WEAK_OBSERVER
 }
