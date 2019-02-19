@@ -1,8 +1,14 @@
 package com.smarthouse.user.entity;
 
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.Pattern;
+
 public class Role {
 
-    private final long id;
+    private final Long id;
+    @Length(max = 255)
+    @Pattern(regexp = "[A-Za-z0-9]*")
     private final String name;
     private final AccessLevel accessLevel;
 

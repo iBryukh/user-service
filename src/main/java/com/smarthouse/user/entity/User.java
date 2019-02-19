@@ -1,11 +1,20 @@
 package com.smarthouse.user.entity;
 
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.Pattern;
+
 public class User {
 
     private final Long id;
+    @Length(max = 255, min = 1)
+    @Pattern(regexp = "[A-Za-z0-9]*")
     private final String name;
+    @Length(max = 255, min = 3)
     private final String email;
+    @Length(max = 255, min = 1)
     private final String phoneNumber;
+    @Length(max = 255, min = 6)
     private final String password;
 
     public User(Long id, String name, String email, String phoneNumber, String password) {
