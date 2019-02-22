@@ -2,12 +2,14 @@ package com.smarthouse.user.entity;
 
 import org.hibernate.validator.constraints.Length;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
 
+@Entity
 public class Role {
 
     @Id

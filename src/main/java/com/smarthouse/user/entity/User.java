@@ -2,17 +2,19 @@ package com.smarthouse.user.entity;
 
 import org.hibernate.validator.constraints.Length;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.Pattern;
 
+@Entity
 public class User {
 
     @Id
     @GeneratedValue
     private final Long id;
     @Length(max = 255, min = 1)
-    @Pattern(regexp = "[A-Za-z0-9]*")
+    @Pattern(regexp = "[A-Za-z][A-Za-z0-9]*")
     private final String name;
     @Length(max = 255, min = 3)
     private final String email;
