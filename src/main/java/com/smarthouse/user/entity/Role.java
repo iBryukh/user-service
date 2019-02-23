@@ -17,10 +17,10 @@ public class Role {
     private final Long id;
     @Length(max = 255)
     @Pattern(regexp = "[A-Za-z0-9]*")
-    private final String name;
+    private String name;
     @Min(0) // ADMIN
     @Max(3) // WEAK_OBSERVER
-    private final Integer accessLevel;
+    private Integer accessLevel;
 
     public Role(long id, String name, Integer accessLevel) {
         this.id = id;
@@ -36,7 +36,15 @@ public class Role {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public Integer getAccessLevel() {
         return accessLevel;
+    }
+
+    public void setAccessLevel(Integer accessLevel) {
+        this.accessLevel = accessLevel;
     }
 }

@@ -35,12 +35,11 @@ public class BeanValidationTest {
 
     private static final Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 
-    private static final User correctUser = new User(id, correctName, correctEmail, correctPhoneNumber, correctPassword);
-    private static final User incorrectUser = new User(id, incorrectName, incorrectEmail, incorrectPhoneNumber, incorrectPassword);
-
     private static final Role correctRole = new Role(id, correctName, correctAccessLevel);
     private static final Role incorrectRole = new Role(id, incorrectName, incorrectAccessLevel);
 
+    private static final Customer INCORRECT_CUSTOMER = new Customer(id, incorrectName, incorrectEmail, incorrectPhoneNumber, incorrectPassword, incorrectRole);
+    private static final Customer CORRECT_CUSTOMER = new Customer(id, correctName, correctEmail, correctPhoneNumber, correctPassword, correctRole);
 
     // User validation
 
@@ -48,7 +47,7 @@ public class BeanValidationTest {
     public void correctUserNameValidation() {
         assertEquals(
                 0,
-                validator.validate(correctUser).stream()
+                validator.validate(CORRECT_CUSTOMER).stream()
                         .filter(it -> it.getPropertyPath().toString().equals(NAME))
                         .count()
         );
@@ -56,7 +55,7 @@ public class BeanValidationTest {
 
     @Test
     public void incorrectUserNameValidation() {
-        validator.validate(incorrectUser).stream()
+        validator.validate(INCORRECT_CUSTOMER).stream()
                 .filter(it -> it.getPropertyPath().toString().equals(NAME))
                 .map(it -> it.getInvalidValue().toString())
                 .forEach(name -> assertEquals(name, incorrectName));
@@ -66,7 +65,7 @@ public class BeanValidationTest {
     public void correctEmailValidation() {
         assertEquals(
                 0,
-                validator.validate(correctUser).stream()
+                validator.validate(CORRECT_CUSTOMER).stream()
                         .filter(it -> it.getPropertyPath().toString().equals(USER_EMAIL))
                         .count()
         );
@@ -74,7 +73,7 @@ public class BeanValidationTest {
 
     @Test
     public void incorrectEmailValidation() {
-        validator.validate(incorrectUser).stream()
+        validator.validate(INCORRECT_CUSTOMER).stream()
                 .filter(it -> it.getPropertyPath().toString().equals(USER_EMAIL))
                 .map(it -> it.getInvalidValue().toString())
                 .forEach(name -> assertEquals(name, incorrectEmail));
@@ -84,7 +83,7 @@ public class BeanValidationTest {
     public void correctPhoneNumberValidation() {
         assertEquals(
                 0,
-                validator.validate(correctUser).stream()
+                validator.validate(CORRECT_CUSTOMER).stream()
                         .filter(it -> it.getPropertyPath().toString().equals(USER_PHONE_NUMBER))
                         .count()
         );
@@ -92,7 +91,7 @@ public class BeanValidationTest {
 
     @Test
     public void incorrectPhoneNumberValidation() {
-        validator.validate(incorrectUser).stream()
+        validator.validate(INCORRECT_CUSTOMER).stream()
                 .filter(it -> it.getPropertyPath().toString().equals(USER_PHONE_NUMBER))
                 .map(it -> it.getInvalidValue().toString())
                 .forEach(name -> assertEquals(name, incorrectPhoneNumber));
@@ -102,7 +101,7 @@ public class BeanValidationTest {
     public void correctPasswordValidation() {
         assertEquals(
                 0,
-                validator.validate(correctUser).stream()
+                validator.validate(CORRECT_CUSTOMER).stream()
                         .filter(it -> it.getPropertyPath().toString().equals(USER_PASSWORD))
                         .count()
         );
@@ -110,7 +109,7 @@ public class BeanValidationTest {
 
     @Test
     public void incorrectPasswordValidation() {
-        validator.validate(incorrectUser).stream()
+        validator.validate(INCORRECT_CUSTOMER).stream()
                 .filter(it -> it.getPropertyPath().toString().equals(USER_PASSWORD))
                 .map(it -> it.getInvalidValue().toString())
                 .forEach(name -> assertEquals(name, incorrectPassword));
