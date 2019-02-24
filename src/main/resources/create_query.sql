@@ -1,5 +1,5 @@
-drop table if exists customer;
-drop table if exists role;
+drop table if exists role cascade;
+drop table if exists customer cascade;
 
 create table role
 (
