@@ -1,30 +1,51 @@
-drop table if exists role cascade;
-drop table if exists customer cascade;
+DROP TABLE IF EXISTS role CASCADE;
+DROP TABLE IF EXISTS customer CASCADE;
+DROP TABLE IF EXISTS device CASCADE;
+DROP TABLE IF EXISTS customer_device CASCADE;
 
-create table role
+CREATE TABLE role
 (
-  id           bigint       not null,
-  name         varchar(255) not null,
-  access_level integer      not null
-    constraint role_access_level_check
-      check ((access_level <= 3) AND (access_level >= 0)),
-  primary key (id)
+  id           BIGINT       NOT NULL,
+  name         VARCHAR(255) NOT NULL,
+  access_level INTEGER      NOT NULL
+    CONSTRAINT role_access_level_check
+    CHECK ((access_level <= 3) AND (access_level >= 0)),
+  PRIMARY KEY (id)
 );
 
-create table customer
+CREATE TABLE customer
 (
-  id           bigint       not null,
-  email        varchar(255) not null,
-  name         varchar(255) not null,
-  password     varchar(255) not null,
-  phone_number varchar(255) not null,
-  role_id      int          not null,
-  foreign key (role_id) references role(id),
-  primary key (id)
+  id           BIGINT       NOT NULL,
+  email        VARCHAR(255) NOT NULL,
+  name         VARCHAR(255) NOT NULL,
+  password     VARCHAR(255) NOT NULL,
+  phone_number VARCHAR(255) NOT NULL,
+  role_id      INT          NOT NULL,
+  FOREIGN KEY (role_id) REFERENCES role (id),
+  PRIMARY KEY (id)
 );
 
-alter table role
-  owner to postgres;
+CREATE TABLE customer_device (
+  customer_id BIGINT NOT NULL,
+  device_id   BIGINT NOT NULL,
+  FOREIGN KEY (customer_id) REFERENCES customer (id) ON DELETE CASCADE ON UPDATE CASCADE,
+  PRIMARY KEY (customer_id, device_id)
+);
 
-alter table customer
-  owner to postgres;
+CREATE TABLE device (
+  id   BIGINT       NOT NULL,
+  name VARCHAR(255) NOT NULL,
+  PRIMARY KEY (id)
+);
+
+ALTER TABLE role
+  OWNER TO postgres;
+
+ALTER TABLE customer
+  OWNER TO postgres;
+
+ALTER TABLE customer_device
+  OWNER TO postgres;
+
+ALTER TABLE device
+  OWNER TO postgres;
