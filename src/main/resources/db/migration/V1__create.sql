@@ -1,6 +1,5 @@
 DROP TABLE IF EXISTS role CASCADE;
 DROP TABLE IF EXISTS customer CASCADE;
-DROP TABLE IF EXISTS device CASCADE;
 DROP TABLE IF EXISTS customer_device CASCADE;
 
 CREATE TABLE role
@@ -9,7 +8,7 @@ CREATE TABLE role
   name         VARCHAR(255) NOT NULL,
   access_level INTEGER      NOT NULL
     CONSTRAINT role_access_level_check
-    CHECK ((access_level <= 3) AND (access_level >= 0)),
+      CHECK ((access_level <= 3) AND (access_level >= 0)),
   PRIMARY KEY (id)
 );
 
@@ -25,17 +24,12 @@ CREATE TABLE customer
   PRIMARY KEY (id)
 );
 
-CREATE TABLE customer_device (
+CREATE TABLE customer_device
+(
   customer_id BIGINT NOT NULL,
   device_id   BIGINT NOT NULL,
   FOREIGN KEY (customer_id) REFERENCES customer (id) ON DELETE CASCADE ON UPDATE CASCADE,
   PRIMARY KEY (customer_id, device_id)
-);
-
-CREATE TABLE device (
-  id   BIGINT       NOT NULL,
-  name VARCHAR(255) NOT NULL,
-  PRIMARY KEY (id)
 );
 
 ALTER TABLE role
@@ -45,7 +39,4 @@ ALTER TABLE customer
   OWNER TO postgres;
 
 ALTER TABLE customer_device
-  OWNER TO postgres;
-
-ALTER TABLE device
   OWNER TO postgres;
