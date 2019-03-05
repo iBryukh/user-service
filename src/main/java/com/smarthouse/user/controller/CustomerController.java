@@ -1,7 +1,7 @@
 package com.smarthouse.user.controller;
 
+import com.smarthouse.commonutil.exceptions.ResourceNotFound;
 import com.smarthouse.user.entity.Customer;
-import com.smarthouse.user.exception.ResourceNotFound;
 import com.smarthouse.user.service.CustomerServiceImpl;
 import com.smarthouse.user.service.RoleServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
