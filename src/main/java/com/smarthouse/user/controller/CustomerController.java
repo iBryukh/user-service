@@ -17,12 +17,10 @@ import java.util.function.Supplier;
 public class CustomerController {
 
     private CustomerServiceImpl customerService;
-    private RoleServiceImpl roleService;
 
     @Autowired
-    public CustomerController(final CustomerServiceImpl customerService, final RoleServiceImpl roleService) {
+    public CustomerController(final CustomerServiceImpl customerService) {
         this.customerService = customerService;
-        this.roleService = roleService;
     }
 
     @GetMapping("/customer")
