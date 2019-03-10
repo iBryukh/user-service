@@ -11,7 +11,7 @@
     <properties>
         <java.version>1.8</java.version>
         <myMavenRepoWriteUrl>https://mymavenrepo.com/repo/49q5oQAutyTl718Nu7gQ/</myMavenRepoWriteUrl>
-        <commonUtilVersion>1.1</commonUtilVersion>
+        <commonUtil.version>1.2</commonUtil.version>
     </properties>
 
     <!-- BOM -->
@@ -64,7 +64,7 @@
         <dependency>
             <groupId>com.smarthouse</groupId>
             <artifactId>common-util</artifactId>
-            <version>${commonUtilVersion}</version>
+            <version>${commonUtil.version}</version>
         </dependency>
 
         <!-- Client library for fetching config from config service -->
