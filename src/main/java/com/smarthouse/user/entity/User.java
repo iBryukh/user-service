@@ -8,8 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.Pattern;
 
-@Entity
-public class Customer {
+@Entity(name = "customer")
+public class User {
 
     @Id
     @GeneratedValue
@@ -26,7 +26,7 @@ public class Customer {
     @ManyToOne
     private Role role;
 
-    public Customer(Long id, String name, String email, String phoneNumber, String password, Role role) {
+    public User(Long id, String name, String email, String phoneNumber, String password, Role role) {
         this.id = id;
         this.name = name;
         this.email = email;

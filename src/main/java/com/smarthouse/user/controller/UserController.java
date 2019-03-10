@@ -1,9 +1,8 @@
 package com.smarthouse.user.controller;
 
 import com.smarthouse.commonutil.exceptions.ResourceNotFound;
-import com.smarthouse.user.entity.Customer;
-import com.smarthouse.user.service.CustomerServiceImpl;
-import com.smarthouse.user.service.RoleServiceImpl;
+import com.smarthouse.user.entity.User;
+import com.smarthouse.user.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,18 +13,18 @@ import java.util.Optional;
 import java.util.function.Supplier;
 
 @RestController
-public class CustomerController {
+public class UserController {
 
-    private CustomerServiceImpl customerService;
+    private UserServiceImpl userService;
 
     @Autowired
-    public CustomerController(final CustomerServiceImpl customerService) {
-        this.customerService = customerService;
+    public UserController(final UserServiceImpl userService) {
+        this.userService = userService;
     }
 
     @GetMapping("/customer")
-    public ResponseEntity<Customer> getCustomerById(@RequestHeader("id") Long id) {
-        Optional<Customer> customerOptional = customerService.getById(id);
+    public ResponseEntity<User> getCustomerById(@RequestHeader("id") Long id) {
+        Optional<User> customerOptional = userService.getById(id);
         return ResponseEntity.ok(
                 customerOptional.orElseThrow((Supplier<RuntimeException>) () ->
                         new ResourceNotFound(String.format("User with id %d doesn't exists", id))
