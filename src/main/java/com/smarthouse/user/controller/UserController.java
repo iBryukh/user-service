@@ -23,7 +23,7 @@ public class UserController {
     }
 
     @GetMapping("/user")
-    public ResponseEntity<User> getCustomerById(@RequestHeader("id") Long id) {
+    public ResponseEntity<User> getUserById(@RequestHeader("id") Long id) {
         Optional<User> customerOptional = userService.getById(id);
         return ResponseEntity.ok(
                 customerOptional.orElseThrow((Supplier<RuntimeException>) () ->
