@@ -22,7 +22,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/customer")
+    @GetMapping("/user")
     public ResponseEntity<User> getCustomerById(@RequestHeader("id") Long id) {
         Optional<User> customerOptional = userService.getById(id);
         return ResponseEntity.ok(
