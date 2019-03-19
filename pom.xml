@@ -11,7 +11,7 @@
     <properties>
         <java.version>1.8</java.version>
         <myMavenRepoWriteUrl>https://mymavenrepo.com/repo/49q5oQAutyTl718Nu7gQ/</myMavenRepoWriteUrl>
-        <commonUtil.version>1.3</commonUtil.version>
+        <commonUtil.version>1.4</commonUtil.version>
     </properties>
 
     <!-- BOM -->
@@ -71,7 +71,6 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-config</artifactId>
-            <version>2.1.0.RELEASE</version>
         </dependency>
 
         <!-- Allows to bootstrap Spring context before executing tests -->
@@ -91,7 +90,6 @@
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
-            <version>2.8.5</version>
         </dependency>
 
         <!-- ORM libraries -->
@@ -102,12 +100,10 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>5.2.2.Final</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
-            <version>5.2.2.Final</version>
         </dependency>
 
         <dependency>
