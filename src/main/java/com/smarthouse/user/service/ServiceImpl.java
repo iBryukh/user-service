@@ -34,7 +34,7 @@ public abstract class ServiceImpl<Item, Key> implements Service<Item, Key> {
     }
 
     @Override
-    public void save(final Item item) {
-        repository.save(item);
+    public Item save(final Item item) {
+        return repository.save(item);
     }
 }

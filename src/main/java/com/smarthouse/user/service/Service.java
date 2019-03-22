@@ -12,5 +12,5 @@ public interface Service<Item, Key> {
 
     void deleteById(Key id);
 
-    void save(Item item);
+    Item save(Item item);
 }
