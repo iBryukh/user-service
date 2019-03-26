@@ -14,7 +14,7 @@ public class Role {
 
     @Id
     @GeneratedValue
-    private final Long id;
+    private Long id;
     @Length(max = 255)
     @Pattern(regexp = "[A-Za-z0-9]*")
     private String name;
@@ -22,10 +22,7 @@ public class Role {
     @Max(3) // WEAK_OBSERVER
     private Integer accessLevel;
 
-    public Role(long id, String name, Integer accessLevel) {
-        this.id = id;
-        this.name = name;
-        this.accessLevel = accessLevel;
+    public Role() {
     }
 
     public long getId() {

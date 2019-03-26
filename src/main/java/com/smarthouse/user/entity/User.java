@@ -13,26 +13,20 @@ public class User {
 
     @Id
     @GeneratedValue
-    private final Long id;
+    private Long id;
     @Length(max = 255, min = 1)
     @Pattern(regexp = "[A-Za-z][A-Za-z0-9]*")
-    private final String name;
+    private String name;
     @Length(max = 255, min = 3)
-    private final String email;
+    private String email;
     @Length(max = 255, min = 1)
-    private final String phoneNumber;
+    private String phoneNumber;
     @Length(max = 255, min = 6)
-    private final String password;
+    private String password;
     @ManyToOne
     private Role role;
 
-    public User(Long id, String name, String email, String phoneNumber, String password, Role role) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.password = password;
-        this.role = role;
+    public User() {
     }
 
     public Role getRole() {
