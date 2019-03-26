@@ -23,6 +23,13 @@ public class Role {
     private Integer accessLevel;
 
     public Role() {
+
+    }
+
+    public Role(final Long id, final String name, final Integer accessLevel) {
+        this.id = id;
+        this.name = name;
+        this.accessLevel = accessLevel;
     }
 
     public long getId() {
