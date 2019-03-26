@@ -33,7 +33,7 @@ public class UserController {
         ));
     }
 
-    @PutMapping("/user")
+    @PostMapping("/user")
     public ResponseEntity<User> putUser(@RequestBody User user) {
         return ResponseEntity.ok(userService.save(user));
     }
