@@ -26,14 +26,14 @@ public class UserController {
     }
 
     @GetMapping("/user/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable("id") int id) {
+    public ResponseEntity<User> getUserById(@PathVariable("id") long id) {
         Optional<User> userOptional = userService.getById(id);
         return ResponseEntity.ok(userOptional.orElseThrow((Supplier<RuntimeException>) () ->
                 new ResourceNotFound(getNoResourceMessage("User", id))
         ));
     }
 
-    @PostMapping("/user")
+    @PutMapping
     public ResponseEntity<User> putUser(@RequestBody User user) {
         return ResponseEntity.ok(userService.save(user));
     }
