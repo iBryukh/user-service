@@ -9,10 +9,9 @@ import javax.validation.constraints.Pattern;
 public class User {
 
     @Id
-    @GeneratedValue
-    private Integer id;
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private int id;
     @Length(max = 255, min = 1)
-    @Pattern(regexp = "[A-Za-z][A-Za-z0-9]*")
     private String name;
     @Length(max = 255, min = 3)
     private String email;

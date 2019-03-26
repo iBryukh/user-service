@@ -52,6 +52,7 @@ DO $$
         freeLevel = freeLevel + 1;
         freeId = freeId + 1;
       END LOOP;
+    alter sequence role_id_seq restart with 4; -- levels count
 
   END $$;
 
@@ -82,5 +83,6 @@ DO $$
         currRoleId = (currRoleId + 1) % roleCount;
         freeId = freeId + 1;
       END LOOP;
+    alter sequence customer_id_seq restart with 10; -- customers count
 
   END $$;
