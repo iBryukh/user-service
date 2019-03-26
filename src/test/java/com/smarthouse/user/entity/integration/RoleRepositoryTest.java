@@ -17,11 +17,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DataJpaTest
 public class RoleRepositoryTest {
 
-    @Autowired
-    private TestEntityManager entityManager;
+
 
     @Autowired
     private RoleRepository roleRepository;
+
+
 
     @Test
     public void saveTest(){
@@ -33,42 +34,42 @@ public class RoleRepositoryTest {
 
     @Test
     public void findByIdTest() {
-        Role emp = new Role(1, "alex", 1);
-        entityManager.persistAndFlush(emp);
-
-        Role fromDb = roleRepository.findById(emp.getId()).orElse(null);
-        assertThat(fromDb.getName()).isEqualTo(emp.getName());
+        Role user2 = roleRepository.save(new Role(1,"alex", 1));
+        Role fromDb1 = roleRepository.findById(user2.getId()).orElse(null);
+        assertThat(user2.getName()).isEqualTo(fromDb1.getName()).isNotNull();
     }
 
-    @Test
-    public void deleteByIdTest() {
 
-        Role user = roleRepository.saveAndFlush(new Role(1, "bar", 2));
-        roleRepository.deleteById(user.getId());
-
-        assertThat(user).isNull();
-    }
     @Test
     public void deleteTest(){
-        Role user = roleRepository.saveAndFlush(new Role(1, "bar", 2));
+        Role user = roleRepository.save(new Role(6, "bar", 2));
+        Role user2 = roleRepository.save(new Role(2, "bas", 2));
         roleRepository.delete(user);
 
-        assertThat(user).isNull();
+        List<Role> allRoles = roleRepository.findAll();
+
+        assertThat(allRoles).hasSize(1);
+    }
+
+    @Test
+    public void deleteTestByID() {
+
+        Role user1 = roleRepository.save(new Role(3, "bar", 2));
+        Role user2 = roleRepository.save(new Role(2, "bas", 2));
+        roleRepository.deleteById(user1.getId());
+
+        List<Role> allRoles = roleRepository.findAll();
+
+        assertThat(allRoles).hasSize(1);
     }
 
     @Test
     public void findAllTest() {
-       Role alex = new Role(1, "alex", 1);
-       Role ron = new Role(2, "ron", 1);
-       Role bob = new Role(3, "bob", 1);
-
-        entityManager.persist(alex);
-        entityManager.persist(bob);
-        entityManager.persist(ron);
-        entityManager.flush();
+       Role alex = roleRepository.save(new Role(5, "alex", 1));
+       Role ron = roleRepository.save(new Role(6, "ron", 1));
 
         List<Role> allRoles = roleRepository.findAll();
 
-        assertThat(allRoles).hasSize(3).extracting(Role::getName).containsOnly(alex.getName(), ron.getName(), bob.getName());
+        assertThat(allRoles).hasSize(2).extracting(Role::getName).containsOnly(alex.getName(), ron.getName());
     }
 }
