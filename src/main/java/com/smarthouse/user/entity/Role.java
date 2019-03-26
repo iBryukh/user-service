@@ -14,7 +14,7 @@ public class Role {
 
     @Id
     @GeneratedValue
-    private  Long id;
+    private Long id;
     @Length(max = 255)
     @Pattern(regexp = "[A-Za-z0-9]*")
     private String name;
