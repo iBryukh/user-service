@@ -5,7 +5,7 @@ DROP TABLE IF EXISTS customer CASCADE;
 
 CREATE TABLE role
 (
-  id           BIGINT       NOT NULL,
+  id           SERIAL       NOT NULL,
   name         VARCHAR(255) NOT NULL,
   access_level INTEGER      NOT NULL
     CONSTRAINT role_access_level_check
@@ -15,7 +15,7 @@ CREATE TABLE role
 
 CREATE TABLE customer
 (
-  id           BIGINT       NOT NULL,
+  id           SERIAL       NOT NULL,
   email        VARCHAR(255) NOT NULL,
   name         VARCHAR(255) NOT NULL,
   password     VARCHAR(255) NOT NULL,

@@ -2,10 +2,7 @@ package com.smarthouse.user.entity;
 
 import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 
 @Entity(name = "customer")
@@ -13,7 +10,7 @@ public class User {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private Integer id;
     @Length(max = 255, min = 1)
     @Pattern(regexp = "[A-Za-z][A-Za-z0-9]*")
     private String name;
@@ -24,12 +21,13 @@ public class User {
     @Length(max = 255, min = 6)
     private String password;
     @ManyToOne
+    @JoinColumn(name = "role_id")
     private Role role;
 
     public User() {
     }
 
-    public User(final long id, final String name, final String email, final String phoneNumber, final String password, final Role role) {
+    public User(final int id, final String name, final String email, final String phoneNumber, final String password, final Role role) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -46,7 +44,7 @@ public class User {
         this.role = role;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 

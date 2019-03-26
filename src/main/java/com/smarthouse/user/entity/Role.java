@@ -14,7 +14,7 @@ public class Role {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private Integer id;
     @Length(max = 255)
     @Pattern(regexp = "[A-Za-z0-9]*")
     private String name;
@@ -26,7 +26,7 @@ public class Role {
 
     }
 
-    public Role(final Long id, final String name, final Integer accessLevel) {
+    public Role(final int id, final String name, final Integer accessLevel) {
         this.id = id;
         this.name = name;
         this.accessLevel = accessLevel;
