@@ -27,7 +27,7 @@ public class RoleRepositoryTest {
     @Test
     public void saveTest(){
         Role user = roleRepository.save(new Role(1,"alex", 1));
-        Role fromDb = roleRepository.findById(user.getId()).orElse(null);
+        Role fromDb = roleRepository.findById((int) user.getId()).orElse(null);
         assertThat(user.getName()).isEqualTo(fromDb.getName()).isNotNull();
     }
 
@@ -35,7 +35,7 @@ public class RoleRepositoryTest {
     @Test
     public void findByIdTest() {
         Role user2 = roleRepository.save(new Role(1,"alex", 1));
-        Role fromDb1 = roleRepository.findById(user2.getId()).orElse(null);
+        Role fromDb1 = roleRepository.findById((int) user2.getId()).orElse(null);
         assertThat(user2.getName()).isEqualTo(fromDb1.getName()).isNotNull();
     }
 
@@ -56,7 +56,7 @@ public class RoleRepositoryTest {
 
         Role user1 = roleRepository.save(new Role(3, "bar", 2));
         Role user2 = roleRepository.save(new Role(2, "bas", 2));
-        roleRepository.deleteById(user1.getId());
+        roleRepository.deleteById((int) user1.getId());
 
         List<Role> allRoles = roleRepository.findAll();
 
