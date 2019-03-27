@@ -10,7 +10,7 @@ import static junit.framework.TestCase.assertEquals;
 
 public class BeanValidationTest {
 
-    private static final long id = 0;
+    private static final int id = 0;
 
     private static final String NAME = "name";
     private static final String correctName = "Name";
