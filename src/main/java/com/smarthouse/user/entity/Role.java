@@ -20,13 +20,13 @@ public class Role {
     private String name;
     @Min(0) // ADMIN
     @Max(3) // WEAK_OBSERVER
-    private Integer accessLevel;
+    private int accessLevel;
 
     public Role() {
 
     }
 
-    public Role(final int id, final String name, final Integer accessLevel) {
+    public Role(final int id, final String name, final int accessLevel) {
         this.id = id;
         this.name = name;
         this.accessLevel = accessLevel;
@@ -44,11 +44,11 @@ public class Role {
         this.name = name;
     }
 
-    public Integer getAccessLevel() {
+    public int getAccessLevel() {
         return accessLevel;
     }
 
-    public void setAccessLevel(Integer accessLevel) {
+    public void setAccessLevel(int accessLevel) {
         this.accessLevel = accessLevel;
     }
 }
