@@ -2,6 +2,7 @@
 
 DROP TABLE IF EXISTS role CASCADE;
 DROP TABLE IF EXISTS customer CASCADE;
+DROP TABLE IF EXISTS customer_device CASCADE;
 
 CREATE TABLE role
 (
@@ -25,10 +26,21 @@ CREATE TABLE customer
   PRIMARY KEY (id)
 );
 
+CREATE TABLE customer_device
+(
+  customer_id integer NOT NULL,
+  device_id   integer NOT NULL,
+  FOREIGN KEY (customer_id) REFERENCES customer (id),
+  PRIMARY KEY (customer_id, device_id)
+);
+
 ALTER TABLE role
   OWNER TO postgres;
 
 ALTER TABLE customer
+  OWNER TO postgres;
+
+ALTER TABLE customer_device
   OWNER TO postgres;
 
 -- GENERATE DATA
@@ -86,3 +98,4 @@ DO $$
     alter sequence customer_id_seq restart with 10; -- customers count
 
   END $$;
+--
