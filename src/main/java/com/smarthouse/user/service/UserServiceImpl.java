@@ -6,9 +6,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserServiceImpl extends ServiceImpl<User, Integer> {
+public class UserServiceImpl extends ServiceImpl<User, Long> {
     @Autowired
-    public UserServiceImpl(final JpaRepository<User, Integer> repository) {
+    public UserServiceImpl(final JpaRepository<User, Long> repository) {
         super(repository);
     }
 }

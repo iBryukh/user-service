@@ -26,7 +26,7 @@ public class UserController {
     }
 
     @GetMapping("/user/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable("id") int id) {
+    public ResponseEntity<User> getUserById(@PathVariable("id") Long id) {
         Optional<User> userOptional = userService.getById(id);
         return ResponseEntity.ok(userOptional.orElseThrow((Supplier<RuntimeException>) () ->
                 new ResourceNotFound(getNoResourceMessage("User", id))
