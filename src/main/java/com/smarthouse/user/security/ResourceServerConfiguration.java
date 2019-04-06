@@ -12,9 +12,9 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
         http
                 .authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/isAliveProtected")
-                .hasRole("ADMIN")
+                .hasRole("Admin")
                 .antMatchers(HttpMethod.GET, "/isAlive")
-                .hasRole("USER")
+                .hasRole("Neighbour")
                 .anyRequest()
                 .authenticated();
     }
