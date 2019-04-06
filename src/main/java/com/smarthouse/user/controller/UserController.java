@@ -25,6 +25,16 @@ public class UserController {
         this.deviceService = deviceService;
     }
 
+    @GetMapping("/isAlive")
+    public ResponseEntity<Boolean> isAlive() {
+        return ResponseEntity.ok(true);
+    }
+
+    @GetMapping("/isAliveProtected")
+    public ResponseEntity<Boolean> isAliveProtected() {
+        return ResponseEntity.ok(true);
+    }
+
     @GetMapping("/user/{id}")
     public ResponseEntity<User> getUserById(@PathVariable("id") Long id) {
         Optional<User> userOptional = userService.getById(id);

@@ -6,12 +6,6 @@ spring:
     url: jdbc:postgresql://localhost:5432/user_service
     username: postgres
     password: root
-    hikari:
-      maximum-pool-size: 5
-      connection-timeout: 30000 # default
-      max-lifetime: 1800000 # 30 minutes
-    type: com.zaxxer.hikari.HikariDataSource
-
   jpa:
     properties:
       hibernate:
@@ -19,11 +13,11 @@ spring:
         dll-auto: update
         temp:
           use_jdbc_metadata_defaults: false # fix hibernate bug with a popped up error
-  flyway:
-    enabled: true
-    url: jdbc:postgresql://localhost:5432/user_service
-    user: postgres
-    password: root
+flyway:
+  enabled: true
+  url: jdbc:postgresql://localhost:5432/user_service
+  user: postgres
+  password: root
 eureka:
   instance:
     preferIpAddress: true
@@ -32,3 +26,7 @@ eureka:
     fetchRegistry: true
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
+security:
+  oauth2:
+    resource:
+      userInfoUri: http://localhost:8003/auth/user
