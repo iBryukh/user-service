@@ -30,3 +30,4 @@ security:
   oauth2:
     resource:
       userInfoUri: http://localhost:8003/auth/user
+signing.key: "345345fsdfsf5345"
