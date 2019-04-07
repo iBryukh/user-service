@@ -2,10 +2,11 @@ package com.smarthouse.user.service;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 
-public abstract class ServiceImpl<Item, Key> implements Service<Item, Key> {
+public abstract class ServiceImpl<Item, Key extends Serializable> implements Service<Item, Key> {
 
     private final JpaRepository<Item, Key> repository;
 
@@ -20,7 +21,7 @@ public abstract class ServiceImpl<Item, Key> implements Service<Item, Key> {
 
     @Override
     public Optional<Item> getById(final Key id) {
-        return repository.findById(id);
+        return Optional.ofNullable(repository.findOne(id));
     }
 
     @Override
@@ -30,7 +31,7 @@ public abstract class ServiceImpl<Item, Key> implements Service<Item, Key> {
 
     @Override
     public void deleteById(final Key id) {
-        repository.deleteById(id);
+        repository.delete(id);
     }
 
     @Override
