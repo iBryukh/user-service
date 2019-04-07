@@ -1,41 +1,39 @@
 package com.smarthouse.user.controller;
 
-import com.smarthouse.commonutil.exceptions.ResourceNotFound;
-import com.smarthouse.user.entity.User;
+import com.smarthouse.commonutil.entities.User;
 import com.smarthouse.user.service.DeviceService;
-import com.smarthouse.user.service.UserServiceImpl;
+import com.smarthouse.user.service.UserDeviceServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
-import java.util.function.Supplier;
 
 import static com.smarthouse.commonutil.exceptions.ResourceNotFound.getNoResourceMessage;
 
 @RestController
 public class UserController {
 
-    private UserServiceImpl userService;
     private DeviceService deviceService;
+    private UserDeviceServiceImpl userDeviceService;
 
     @Autowired
-    public UserController(final UserServiceImpl userService, final DeviceService deviceService) {
-        this.userService = userService;
+    public UserController(final DeviceService deviceService, final UserDeviceServiceImpl userDeviceService) {
         this.deviceService = deviceService;
+        this.userDeviceService = userDeviceService;
     }
 
-    @GetMapping("/user/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable("id") int id) {
-        Optional<User> userOptional = userService.getById(id);
-        return ResponseEntity.ok(userOptional.orElseThrow((Supplier<RuntimeException>) () ->
-                new ResourceNotFound(getNoResourceMessage("User", id))
-        ));
+    @GetMapping("/isAlive")
+    public ResponseEntity<Boolean> isAlive() {
+        return ResponseEntity.ok(true);
     }
 
-    @PostMapping("/user")
-    public ResponseEntity<User> putUser(@RequestBody User user) {
-        return ResponseEntity.ok(userService.save(user));
+    @GetMapping("/isAliveProtected")
+    public ResponseEntity<Boolean> isAliveProtected() {
+        return ResponseEntity.ok(true);
+    }
+
+    @GetMapping("/user/{id}/devices")
+    public ResponseEntity<User> getUserById(@PathVariable("id") Long id) {
+        throw new UnsupportedOperationException("Operation unsupported yet");
     }
 
 }
