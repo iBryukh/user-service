@@ -5,18 +5,19 @@ import com.smarthouse.user.service.DeviceService;
 import com.smarthouse.user.service.UserDeviceServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
 
-import static com.smarthouse.commonutil.exceptions.ResourceNotFound.getNoResourceMessage;
 
 @RestController
-public class UserController {
+public class UserDevicesController {
 
     private DeviceService deviceService;
     private UserDeviceServiceImpl userDeviceService;
 
     @Autowired
-    public UserController(final DeviceService deviceService, final UserDeviceServiceImpl userDeviceService) {
+    public UserDevicesController(final DeviceService deviceService, final UserDeviceServiceImpl userDeviceService) {
         this.deviceService = deviceService;
         this.userDeviceService = userDeviceService;
     }
