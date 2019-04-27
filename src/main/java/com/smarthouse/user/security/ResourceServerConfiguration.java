@@ -15,6 +15,8 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
                 .hasRole("Admin")
                 .antMatchers(HttpMethod.GET, "/isAlive")
                 .hasAnyRole("Neighbour", "Admin")
+                .antMatchers(HttpMethod.GET, "/user/{id}/devices")
+                .hasAnyRole("Neighbour", "Admin")
                 .anyRequest()
                 .authenticated();
     }

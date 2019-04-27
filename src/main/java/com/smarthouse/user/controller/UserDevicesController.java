@@ -1,22 +1,26 @@
 package com.smarthouse.user.controller;
 
-import com.smarthouse.commonutil.entities.User;
+import com.smarthouse.commonutil.entities.Device;
 import com.smarthouse.user.service.DeviceService;
 import com.smarthouse.user.service.UserDeviceServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
 
-import static com.smarthouse.commonutil.exceptions.ResourceNotFound.getNoResourceMessage;
+import java.util.HashSet;
+import java.util.Set;
+
 
 @RestController
-public class UserController {
+public class UserDevicesController {
 
     private DeviceService deviceService;
     private UserDeviceServiceImpl userDeviceService;
 
     @Autowired
-    public UserController(final DeviceService deviceService, final UserDeviceServiceImpl userDeviceService) {
+    public UserDevicesController(final DeviceService deviceService, final UserDeviceServiceImpl userDeviceService) {
         this.deviceService = deviceService;
         this.userDeviceService = userDeviceService;
     }
@@ -32,8 +36,9 @@ public class UserController {
     }
 
     @GetMapping("/user/{id}/devices")
-    public ResponseEntity<User> getUserById(@PathVariable("id") Long id) {
-        throw new UnsupportedOperationException("Operation unsupported yet");
+    public ResponseEntity<Set<Device>> getUserById(@PathVariable("id") Long userId) {
+        Set<Long> ids = new HashSet<>(userDeviceService.getUserDevicesIds(userId));
+        return ResponseEntity.ok(deviceService.getDevices(ids));
     }
 
 }
